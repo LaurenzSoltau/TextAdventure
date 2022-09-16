@@ -2,7 +2,6 @@ package game;
 
 
 public class Output {
-	String[] commands = {"commands", "stats", "exit", "gooutlands", "gotown", "goarena"};
 	public void printStartMessage() {
 		System.out.println("Willkommen in ESCAPE. In diesem Textadventure musst du Gold durch Quests, "
 				+ "Monster und Arenen Kämpfen bekommen, um dich in der Stadt freizukaufen.");
@@ -16,7 +15,7 @@ public class Output {
 	
 	public void printCommands() {
 		System.out.println("Du hast die folgenden Commands zur Verfügung. Du kannst commands nur angeben wenn du dieses Symbol siehst >");
-		for (String command : commands) {
+		for (String command : Actionhandler.commands) {
 			System.out.print(command + ", ");	
 		}
 		System.out.println();

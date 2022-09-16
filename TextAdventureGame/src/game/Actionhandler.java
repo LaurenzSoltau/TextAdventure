@@ -2,7 +2,7 @@ package game;
 
 public class Actionhandler {
 	Output out = new Output();
-	String[] commands = {"commands", "stats", "exit", "gooutlands", "gotown", "goarena"};
+	static String[] commands = {"commands", "stats", "exit", "gooutlands", "gotown", "goarena", "printshop"};
 	
 	public void chooseHandler(String command, Player user, Town town) {
 		if (command.equals("exit")) {
@@ -15,6 +15,12 @@ public class Actionhandler {
 			stats(user);
 		} else if (command.equals("gotown")) {
 			goTown(town, user);
+		} else if(command.equals("printshop")) {
+			if (user.currentLocation != 0) {
+				System.out.println("Du musst in der Stadt sein, um das zu tun.");
+				return;
+			}
+			town.vendor.printShop();
 		}
 		else {
 			out.printCommandError();
@@ -42,4 +48,5 @@ public class Actionhandler {
 		user.currentLocation = 0;
 		town.vendor.talk();
 	}
+	
 }
