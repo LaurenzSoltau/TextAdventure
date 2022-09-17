@@ -1,8 +1,10 @@
 package game;
 
+
 public class Actionhandler {
 	Output out = new Output();
-	static String[] commands = {"commands", "stats", "exit", "gooutlands", "gotown", "goarena", "printshop"};
+	static String[] commands = {"commands", "stats", "exit", "gooutlands", "gotown", "goarena", "printshop",
+			"buyitem"};
 	
 	public void chooseHandler(String command, Player user, Town town) {
 		if (command.equals("exit")) {
@@ -21,6 +23,12 @@ public class Actionhandler {
 				return;
 			}
 			town.vendor.printShop();
+		} else if (command.equals("buyitem")) {
+			if (user.currentLocation != 0) {
+				System.out.println("Du musst in der Stadt sein, um das zu tun.");
+				return;
+			}
+			buyItem(user, town);
 		}
 		else {
 			out.printCommandError();
@@ -47,6 +55,26 @@ public class Actionhandler {
 		}
 		user.currentLocation = 0;
 		town.vendor.talk();
+	}
+	
+	public void buyItem(Player user, Town town) {
+		if (town.vendor.sufficientGoldandSpace(user)) {
+			if (user.items.size() > 2) {
+				user.items.remove(0);
+				user.update(user);
+				Item boughtItem = town.vendor.buyItem();
+				user.gold -= boughtItem.price;
+				user.items.add(0, boughtItem);
+				out.printBoughtItem();
+				user.update(user);
+			} else {
+				Item boughtItem = town.vendor.buyItem();
+				user.gold -= boughtItem.price;
+				user.items.add(boughtItem);
+				out.printBoughtItem();
+				user.update(user);
+			}
+		}
 	}
 	
 }

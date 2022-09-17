@@ -3,9 +3,10 @@ package game;
 import java.util.Random;
 
 public class Item {
-
+	
 	static int itemCount;
 	String itemName;
+	int price;
 	int addlives;
 	int adddamage;
 	int adddefense;
@@ -27,6 +28,7 @@ public class Item {
 			this.addlives = rand.nextInt(max) + min;
 			this.adddamage = rand.nextInt(max) + min;
 			this.adddefense = rand.nextInt(max) + min;
+			this.price = 50;
 			
 		}
 		
@@ -36,6 +38,7 @@ public class Item {
 			this.addlives = rand.nextInt(max) + min;
 			this.adddamage = rand.nextInt(max) + min;
 			this.adddefense = rand.nextInt(max) + min;
+			this.price = 100;
 		}
 		if (tier  == 3) {
 			int max = 5 * tier;
@@ -43,6 +46,7 @@ public class Item {
 			this.addlives = rand.nextInt(max) + min;
 			this.adddamage = rand.nextInt(max) + min;
 			this.adddefense = rand.nextInt(max) + min;
+			this.price = 150;
 		}
 	}
 	

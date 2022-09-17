@@ -11,6 +11,7 @@ public class Output {
 	public void printStats(Player user) {
 		System.out.println("Stats: ");
 		System.out.println("lives: " + user.lives + "\n" + "damage: " + user.damage + "\n" + "defense: " + user.defense + "\n");
+		System.out.println("Gold: " + user.gold);
 	}
 	
 	public void printCommands() {
@@ -28,5 +29,9 @@ public class Output {
 	public void printCommandError() {
 		System.out.println("Den command gibt es nicht oder du hast ihn falsch geschrieben. \nGib "
 				+ "commands ein um zu sehen welche commands es gibt.");
+	}
+	
+	public void printBoughtItem() {
+		System.out.println("Du hast ein item gekauft! Viel Spaßm damit.");
 	}
 }
