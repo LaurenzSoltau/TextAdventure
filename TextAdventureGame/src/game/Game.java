@@ -26,7 +26,7 @@ public class Game {
 		while (gameRunning) {
 			out.printPrompt();
 			currentCommand = in.next();
-			handler.chooseHandler(currentCommand, user, town);
+			handler.chooseHandler(currentCommand, user, town, in);
 			
 			
 		}
