@@ -5,9 +5,10 @@ import java.util.Scanner;
 public class Actionhandler {
 	Output out = new Output();
 	static String[] commands = {"commands", "stats", "exit", "gooutlands", "gotown", "goarena", "printshop",
-			"buyitem"};
+			"buyitem", "showinv"};
+	static String[] fightcommands = {""};
 	
-	public void chooseHandler(String command, Player user, Town town, Scanner in) {
+	public void chooseHandler(String command, Player user, Town town, Scanner in, Outlands outlands) {
 		if (command.equals("exit")) {
 			exitGame();
 		}	
@@ -30,12 +31,27 @@ public class Actionhandler {
 				return;
 			}
 			buyItem(user, town, in);
+		} else if (command.equals("showinv")) {
+			showinv(user);
+		} else if (command.equals("gooutlands")) {
+			gooutlands(outlands, user);
 		}
 		else {
 			out.printCommandError();
 		}
 	}
 	
+
+	private void gooutlands(Outlands outlands, Player user) {
+			if (user.currentLocation == 1) {
+				System.out.println("Du bist schon in den Outlands");
+				return;
+			}
+			user.currentLocation = 1;
+			outlands.hunter.talk();
+	}
+
+
 	public void exitGame() {
 		System.out.println("Das Spiel wird beendet.");
 		System.exit(0);
@@ -56,16 +72,23 @@ public class Actionhandler {
 		}
 		user.currentLocation = 0;
 		town.vendor.talk();
-	}
+	} 
+	
 	
 	public void buyItem(Player user, Town town, Scanner in) {
 		if (town.vendor.sufficientGoldandSpace(user, in)) {
 			if (user.items.size() > 2) {
-				user.items.remove(0);
+				System.out.println("Gib '1' '2' oder '3' ein, um das Item zu tauschen.");
+				int slot = in.nextInt() - 1;
+				if (slot > 2) {
+					System.out.println("Den Slot gibt es nicht, der Vorgang wurde abgebrochen.");
+					return;
+				}
+				user.items.remove(slot);
 				user.update(user);
 				Item boughtItem = town.vendor.buyItem();
 				user.gold -= boughtItem.price;
-				user.items.add(0, boughtItem);
+				user.items.add(slot, boughtItem);
 				out.printBoughtItem();
 				user.update(user);
 			} else {
@@ -78,4 +101,13 @@ public class Actionhandler {
 		}
 	}
 	
+	private void showinv(Player user) {
+		System.out.println("Hier ist dein Inventar:");
+		for (Item item : user.items) {
+			System.out.println(item.itemName);
+			System.out.println("+lives: " + item.addlives + "\n+damage: "+item.adddamage +
+					"\n+defense: " + item.adddefense + "\nPreis: " + item.price);
+			System.out.println();
+		}
+	}
 }

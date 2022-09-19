@@ -13,8 +13,9 @@ public class Vendor extends Npc {
 			System.out.println("Hallo, du bist das erste mal in der Stadt");
 			System.out.println("Ich bin " + name + "." + " Bei mir kannst du Items kaufen.");
 			this.newShop();
+			this.talkedTo = true;
 		} else {
-			System.out.println("Willkommen zurück. Ich hoffe du hattest eine gute Reise!");
+			System.out.println("Willkommen zurück in der Stadt. Ich hoffe du hattest eine gute Reise!");
 		}
 	}
 	
@@ -43,12 +44,12 @@ public class Vendor extends Npc {
 		if (user.items.size() > 2) {
 			
 			System.out.println("Dein Inventar ist voll. Tippe 'n' ein, wenn du den Kauf abbrechen willst.");
-			System.out.println("Um dein Item an slot 1 auszutauschen, gib '1' ein.");
+			System.out.println("Wenn du ein Item austauschen willst tippe 't'");
 			String answer = in.next();
 			if (answer.equals("n")) {
 				return false;
 			}
-			if (!answer.equals("n") && !answer.equals("1")) {
+			if (!answer.equals("n") && !answer.equals("t")) {
 				return false;
 			}
 		}

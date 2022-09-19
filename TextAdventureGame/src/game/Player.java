@@ -27,8 +27,8 @@ public class Player {
 	
 	public void update(Player user) {
 		this.lives = 10;
-		this.damage = 10;
-		this.defense = 10;
+		this.damage = 2;
+		this.defense = 0;
 		for(Item item : user.items) {
 			this.lives += item.addlives;
 			this.damage += item.adddamage;

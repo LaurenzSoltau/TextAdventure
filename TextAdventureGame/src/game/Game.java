@@ -9,6 +9,7 @@ public class Game {
 	Player user;
 	Actionhandler handler;
 	Town town;
+	Outlands outlands;
 
 	
 	public Game() {
@@ -17,6 +18,7 @@ public class Game {
 		this.out = new Output();
 		this.handler = new Actionhandler();
 		this.town = new Town();
+		this.outlands = new Outlands();
 	}
 	public void runGame() {
 		String currentCommand;
@@ -26,7 +28,7 @@ public class Game {
 		while (gameRunning) {
 			out.printPrompt();
 			currentCommand = in.next();
-			handler.chooseHandler(currentCommand, user, town, in);
+			handler.chooseHandler(currentCommand, user, town, in, outlands);
 			
 			
 		}

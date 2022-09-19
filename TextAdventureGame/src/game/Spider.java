@@ -35,5 +35,4 @@ public class Spider extends Enemy {
 		System.out.println("Ich werde dich aufessen, du hast keine Chance gegen meine Netze");
 		
 	}
-	
 }
